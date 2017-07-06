@@ -1,0 +1,32 @@
+<html>
+<body>
+
+<script>
+
+function add(){
+    let request = new XMLHttpRequest();
+	request.open("POST", "/add", true);
+    
+	//Send the proper header information along with the request
+    request.setRequestHeader("Content-type", "application/json");
+
+	var client = {name : "Lynn",age : 17};
+	
+	request.send(JSON.stringify(client));
+}	
+	
+	
+function display(){
+    let xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("GET", "/display", false);
+	xmlHttp.send(null);
+	document.write(xmlHttp.responseText);
+}
+
+
+</script> 
+
+<button onClick=display()>display</button>
+<button onClick=add()>add</button>
+</body>
+</html>
