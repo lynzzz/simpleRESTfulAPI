@@ -28,11 +28,21 @@ function del(){
     let id = document.getElementById("deleteID").value;
 	let url =  "/users/" + id;
 
-	console.log("url");
 	let xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("DELETE", url, false);
 	xmlHttp.send(null);
 	display();
+}
+
+function edit(){
+   let id = document.getElementById("editID").value;
+   url = "users/" + id;
+   
+   let request = new XMLHttpRequest();
+   request.open("PUT", url, false);
+   request.send(null);
+   display();
+   
 }
 
 
@@ -40,9 +50,15 @@ function del(){
 
 <button onClick=display()>display</button>
 <button onClick=add()>add</button>
+
 <div>
 <input id="deleteID" type=text></input>
 <button onClick=del()>delete</button>
+</div>
+
+<div>
+<input id="editID" type=text></input>
+<button onClick=edit()>edit</button>
 </div>
 </body>
 </html>

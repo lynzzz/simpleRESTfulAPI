@@ -43,4 +43,15 @@ public class MyController {
 			}
 		}
 	}
-}
+	
+	@RequestMapping(value="/users/{id}", method=RequestMethod.PUT)
+		void put( @PathVariable long id){
+			for( Client c : users){
+				if ( c.getId() == id){
+                    c.setAge(1000);
+                    c.setName("Wahaha");
+				}
+			}
+		}
+	}
+
