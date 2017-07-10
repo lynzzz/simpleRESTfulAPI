@@ -5,22 +5,34 @@
 
 function add(){
     let request = new XMLHttpRequest();
-	request.open("POST", "/add", true);
+	request.open("POST", "/users", false);
     
 	//Send the proper header information along with the request
     request.setRequestHeader("Content-type", "application/json");
 
-	var client = {name : "Lynn",age : 17};
-	
+	var client = {id : 1, name : "Lynn" ,age : 17};
+
 	request.send(JSON.stringify(client));
+	display();
 }	
 	
 	
 function display(){
     let xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("GET", "/display", false);
+	xmlHttp.open("GET", "/users", false);
 	xmlHttp.send(null);
-	document.write(xmlHttp.responseText);
+	document.write(xmlHttp.response);
+}
+
+function del(){
+    let id = document.getElementById("deleteID").value;
+	let url =  "/users/" + id;
+
+	console.log("url");
+	let xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("DELETE", url, false);
+	xmlHttp.send(null);
+	display();
 }
 
 
@@ -28,5 +40,9 @@ function display(){
 
 <button onClick=display()>display</button>
 <button onClick=add()>add</button>
+<div>
+<input id="deleteID" type=text></input>
+<button onClick=del()>delete</button>
+</div>
 </body>
 </html>

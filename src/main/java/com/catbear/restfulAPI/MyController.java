@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,17 +21,26 @@ public class MyController {
     
     static List<Client> users = Collections.synchronizedList(new ArrayList<>()); 
 
+	@RequestMapping(value="/users", method=RequestMethod.GET)
+	List<Client> display(){
+		return users;
+	}
 	
-	
-	@RequestMapping(value="/add",  method=RequestMethod.POST)
-	void f( @RequestBody Client c){
-
-		System.out.println(c.getAge());
+	@RequestMapping(value="/users",  method=RequestMethod.POST)
+	void add( @RequestBody Client c){
 		users.add(c);
 	}
 	
-	@RequestMapping(value="/display", method=RequestMethod.GET)
-		List<Client> f(){
-			return users;
+
+	
+	@RequestMapping(value="/users/{id}", method=RequestMethod.DELETE)
+	void delete( @PathVariable  long id){
+		for( Client c : users){
+			if ( c.getId() == id){
+				System.out.print("id is" + id );
+
+				users.remove(c);
+			}
 		}
+	}
 }
